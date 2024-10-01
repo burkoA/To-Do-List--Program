@@ -1,65 +1,79 @@
-﻿namespace ToDoList
+﻿using ToDoList.Models;
+using ToDoList.Service;
+
+namespace ToDoList
 {
     internal class Program
     {
 
-        private const string commandList = "\n1. View list of tasks \n" +
+        private const string _commandList = "\n1. View list of tasks \n" +
             "2. Add task \n" +
             "3. Delete Task \n" +
             "0. End program";
 
-        private static List<string> taskList = new List<string>();
-        private static string choosenCommand = "";
+        private static List<TaskModel> _taskList = new List<TaskModel>();
+        private static string _choosenCommand = "";
+
+        private static TaskModel _task = new TaskModel();
 
         static void Main(string[] args)
         {
-            Console.WriteLine($"Hello User! I'm To-Do List program. Choose the command - {commandList}");
-            choosenCommand = Console.ReadLine();
+            FileService.CreateJsonFile();
+            LoadTasks();
 
-            while (choosenCommand != "0")
+            Console.WriteLine($"Hello User! I'm To-Do List program. Choose the command - {_commandList}");
+            _choosenCommand = Console.ReadLine();
+
+            while (_choosenCommand != "0")
             {
-                switch (choosenCommand)
+                switch (_choosenCommand)
                 {
                     case "1":
-                        GetTaskList(taskList);
+                        GetTaskList();
                         break;
                     case "2":
                         Console.WriteLine("Write your task for adding - ");
                         string taskToAdd = Console.ReadLine();
-                        AddTaskToList(taskList, taskToAdd);
+                        AddTaskToList(taskToAdd);
                         break;
                     case "3":
                         Console.WriteLine($"Write number of task that you want delete - ");
-                        GetTaskList(taskList);
+                        GetTaskList();
                         string choosenTask = Console.ReadLine();
-                        DeleteTaskFromList(taskList, choosenTask);
+                        DeleteTaskFromList(choosenTask);
                         break;
                     default:
                         Console.WriteLine("Invalid command. Please try again!");
                         break;
                 }
 
-                Console.WriteLine($"{commandList}");
-                choosenCommand = Console.ReadLine();
+                Console.WriteLine($"{_commandList}");
+                _choosenCommand = Console.ReadLine();
             }
         }
 
-        private static void GetTaskList(List<string> list)
+        private static void LoadTasks()
         {
-            if (list.Count == 0)
+            _taskList = FileService.LoadTasksFromFile();
+        }
+
+        private static void GetTaskList()
+        {
+            if (_taskList.Count == 0)
             {
-                Console.WriteLine("Your list is empty :(");
+                Console.WriteLine("Your task list is empty.");
             }
             else
             {
-                for (int count = 0; count < list.Count; count++)
+                for (int i = 0; i < _taskList.Count; i++)
                 {
-                    Console.WriteLine($"{count + 1}. {list[count]} \n");
+                    TaskModel task = _taskList[i];
+                    Console.WriteLine($"{i + 1}. Task - {task.Task}, completed - {task.IsCompleted}, date - {task.CompleteDate}");
                 }
             }
         }
 
-        private static void AddTaskToList(List<string> list, string? task)
+        private static void AddTaskToList(string? task)
         {
             while (string.IsNullOrEmpty(task))
             {
@@ -67,18 +81,25 @@
                 task = Console.ReadLine();
             }
 
-            list.Add(task);
+            _task.Task = task;
+
+            _taskList.Add(_task);
+            FileService.SaveTasksToFile(_taskList);
+
             Console.WriteLine("\n Your task was successfuly added :) . Your list - \n");
-            GetTaskList(list);
+            GetTaskList();
         }
 
-        private static void DeleteTaskFromList(List<string> list, string? numberOfTask)
+        private static void DeleteTaskFromList(string? numberOfTask)
         {
-            if (int.TryParse(numberOfTask, out int number) && number > 0 && number <= list.Count)
+            if (int.TryParse(numberOfTask, out int number) && number > 0 && number <= _taskList.Count)
             {
-                list.RemoveAt(number - 1);
+                _taskList.RemoveAt(number - 1);
+
+                FileService.SaveTasksToFile(_taskList);
+
                 Console.WriteLine("\n Your task was successfuly deleted :) . Your list - \n");
-                GetTaskList(list);
+                GetTaskList();
             }
             else
             {
