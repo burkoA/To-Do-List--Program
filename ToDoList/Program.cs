@@ -9,10 +9,13 @@ namespace ToDoList
         private const string _commandList = "\n1. View list of tasks \n" +
             "2. Add task \n" +
             "3. Delete Task \n" +
+            "4. Add date to task \n" +
+            "5. Mark as completed or uncompleted \n" +
             "0. End program";
 
         private static List<TaskModel> _taskList = new List<TaskModel>();
         private static string _choosenCommand = "";
+        private static string choosenTask = "";
 
         private static TaskModel _task = new TaskModel();
 
@@ -39,8 +42,20 @@ namespace ToDoList
                     case "3":
                         Console.WriteLine($"Write number of task that you want delete - ");
                         GetTaskList();
-                        string choosenTask = Console.ReadLine();
+                        choosenTask = Console.ReadLine();
                         DeleteTaskFromList(choosenTask);
+                        break;
+                    case "4":
+                        Console.WriteLine($"Write number of task for adding date - ");
+                        GetTaskList();
+                        choosenTask = Console.ReadLine();
+                        AddAndEditDateTask(choosenTask);
+                        break;
+                    case "5":
+                        Console.WriteLine($"Write numbber of task for change to completed - ");
+                        GetTaskList();
+                        choosenTask = Console.ReadLine();
+                        MarkAsCompletedOrUnCompleted(choosenTask);
                         break;
                     default:
                         Console.WriteLine("Invalid command. Please try again!");
@@ -68,7 +83,7 @@ namespace ToDoList
                 for (int i = 0; i < _taskList.Count; i++)
                 {
                     TaskModel task = _taskList[i];
-                    Console.WriteLine($"{i + 1}. Task - {task.Task}, completed - {task.IsCompleted}, date - {task.CompleteDate}");
+                    Console.WriteLine($"{i + 1}. Task - {task.Task}, completed - {task.IsCompleted}, date - {(task.CompleteDate.HasValue ? task.CompleteDate.Value.ToString("MM/dd/yy") : "No data set")}");
                 }
             }
         }
@@ -81,13 +96,12 @@ namespace ToDoList
                 task = Console.ReadLine();
             }
 
-            _task.Task = task;
+            TaskModel newTask = new TaskModel { Task = task };
 
-            _taskList.Add(_task);
+            _taskList.Add(newTask);
             FileService.SaveTasksToFile(_taskList);
 
-            Console.WriteLine("\n Your task was successfuly added :) . Your list - \n");
-            GetTaskList();
+            SuccAddToListText();
         }
 
         private static void DeleteTaskFromList(string? numberOfTask)
@@ -98,13 +112,73 @@ namespace ToDoList
 
                 FileService.SaveTasksToFile(_taskList);
 
-                Console.WriteLine("\n Your task was successfuly deleted :) . Your list - \n");
-                GetTaskList();
+                SuccAddToListText();
             }
             else
             {
                 Console.WriteLine("Invalid task number. Please try again.");
             }
+        }
+
+        private static void AddAndEditDateTask(string chooseTask)
+        {
+            if(int.TryParse(chooseTask, out int number) && number > 0 && number <= _taskList.Count)
+            {
+                Console.WriteLine("Provide data for event (ex. mm/dd/yy)");
+                string date = Console.ReadLine();
+
+                if (DateTime.TryParse(date, out DateTime convertDate) && convertDate > DateTime.Now)
+                {
+                    _taskList[number-1].CompleteDate = convertDate;
+
+                    FileService.SaveTasksToFile(_taskList);
+
+                    SuccAddToListText();
+                }
+                else
+                {
+                    Console.WriteLine("Invalid date format or date earlier of todays day. Please provide date again");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid task number. Please try again.");
+            }
+        }
+
+        private static void MarkAsCompletedOrUnCompleted(string chooseTask)
+        {
+            if (int.TryParse(chooseTask, out int number) && number > 0 && number <= _taskList.Count)
+            {
+
+                if (_taskList[number - 1].IsCompleted == false)
+                {
+
+                    _taskList[number - 1].IsCompleted = true;
+
+                    FileService.SaveTasksToFile(_taskList);
+
+                    SuccAddToListText();
+                }
+                else if (_taskList[number - 1].IsCompleted == true)
+                {
+                    _taskList[number - 1].IsCompleted = false;
+
+                    FileService.SaveTasksToFile(_taskList);
+
+                    SuccAddToListText();
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid task number. Please try again.");
+            }
+        }
+
+        private static void SuccAddToListText()
+        {
+            Console.WriteLine("\n Operation ended successfuly :) . Your list - \n");
+            GetTaskList();
         }
     }
 }
