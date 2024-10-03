@@ -1,6 +1,6 @@
 ﻿namespace ToDoListWinForms.Forms
 {
-    partial class CreateForm
+    partial class EditForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,93 +29,92 @@
         private void InitializeComponent()
         {
             label1 = new Label();
-            dateTextBox = new TextBox();
             label2 = new Label();
             label3 = new Label();
-            taskTextBox = new TextBox();
-            saveCreateButton = new Button();
-            closeButton = new Button();
+            editDateBox = new TextBox();
+            editTaskBox = new TextBox();
+            SaveEditButton = new Button();
+            EditCloseButton = new Button();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 20F);
-            label1.ForeColor = Color.Black;
-            label1.Location = new Point(41, 9);
+            label1.Location = new Point(66, 9);
             label1.Name = "label1";
-            label1.Size = new Size(218, 37);
+            label1.Size = new Size(187, 37);
             label1.TabIndex = 0;
-            label1.Text = "Create Task Form";
-            // 
-            // dateTextBox
-            // 
-            dateTextBox.Location = new Point(12, 95);
-            dateTextBox.Name = "dateTextBox";
-            dateTextBox.Size = new Size(130, 23);
-            dateTextBox.TabIndex = 1;
+            label1.Text = "Edit Task Form";
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F);
-            label2.Location = new Point(12, 71);
+            label2.Location = new Point(12, 78);
             label2.Name = "label2";
             label2.Size = new Size(130, 21);
-            label2.TabIndex = 2;
+            label2.TabIndex = 1;
             label2.Text = "Date - mm/dd/yy";
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 12F);
-            label3.Location = new Point(148, 71);
+            label3.Location = new Point(160, 78);
             label3.Name = "label3";
             label3.Size = new Size(122, 21);
-            label3.TabIndex = 3;
+            label3.TabIndex = 2;
             label3.Text = "Task Description";
             // 
-            // taskTextBox
+            // editDateBox
             // 
-            taskTextBox.Location = new Point(148, 95);
-            taskTextBox.Name = "taskTextBox";
-            taskTextBox.Size = new Size(153, 23);
-            taskTextBox.TabIndex = 4;
+            editDateBox.Location = new Point(12, 102);
+            editDateBox.Name = "editDateBox";
+            editDateBox.Size = new Size(130, 23);
+            editDateBox.TabIndex = 3;
             // 
-            // saveCreateButton
+            // editTaskBox
             // 
-            saveCreateButton.Location = new Point(67, 143);
-            saveCreateButton.Name = "saveCreateButton";
-            saveCreateButton.Size = new Size(75, 23);
-            saveCreateButton.TabIndex = 5;
-            saveCreateButton.Text = "Save";
-            saveCreateButton.UseVisualStyleBackColor = true;
-            saveCreateButton.Click += saveCreateButton_Click;
+            editTaskBox.Location = new Point(160, 102);
+            editTaskBox.Name = "editTaskBox";
+            editTaskBox.Size = new Size(167, 23);
+            editTaskBox.TabIndex = 4;
             // 
-            // closeButton
+            // SaveEditButton
             // 
-            closeButton.Location = new Point(148, 143);
-            closeButton.Name = "closeButton";
-            closeButton.Size = new Size(75, 23);
-            closeButton.TabIndex = 6;
-            closeButton.Text = "Close";
-            closeButton.UseVisualStyleBackColor = true;
-            closeButton.Click += closeButton_Click;
+            SaveEditButton.Location = new Point(67, 163);
+            SaveEditButton.Name = "SaveEditButton";
+            SaveEditButton.Size = new Size(75, 23);
+            SaveEditButton.TabIndex = 5;
+            SaveEditButton.Text = "Save";
+            SaveEditButton.UseVisualStyleBackColor = true;
+            SaveEditButton.Click += SaveEditButton_Click;
             // 
-            // CreateForm
+            // EditCloseButton
+            // 
+            EditCloseButton.Location = new Point(160, 163);
+            EditCloseButton.Name = "EditCloseButton";
+            EditCloseButton.Size = new Size(75, 23);
+            EditCloseButton.TabIndex = 6;
+            EditCloseButton.Text = "Close";
+            EditCloseButton.UseVisualStyleBackColor = true;
+            EditCloseButton.Click += EditCloseButton_Click;
+            // 
+            // EditForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(320, 330);
-            Controls.Add(closeButton);
-            Controls.Add(saveCreateButton);
-            Controls.Add(taskTextBox);
+            ClientSize = new Size(339, 240);
+            Controls.Add(EditCloseButton);
+            Controls.Add(SaveEditButton);
+            Controls.Add(editTaskBox);
+            Controls.Add(editDateBox);
             Controls.Add(label3);
             Controls.Add(label2);
-            Controls.Add(dateTextBox);
             Controls.Add(label1);
-            Name = "CreateForm";
-            Text = "Create Form";
+            Name = "EditForm";
+            Text = "EditForm";
             ResumeLayout(false);
             PerformLayout();
         }
@@ -123,11 +122,11 @@
         #endregion
 
         private Label label1;
-        private TextBox dateTextBox;
         private Label label2;
         private Label label3;
-        private TextBox taskTextBox;
-        private Button saveCreateButton;
-        private Button closeButton;
+        private TextBox editDateBox;
+        private TextBox editTaskBox;
+        private Button SaveEditButton;
+        private Button EditCloseButton;
     }
 }

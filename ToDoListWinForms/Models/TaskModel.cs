@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ToDoListWinForms.Models
 {
-    internal class TaskModel
+    public class TaskModel
     {
         public string Task { get; set; } = "";
         public bool IsCompleted { get; set; } = false;

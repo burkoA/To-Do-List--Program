@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using ToDoListWinForms.Forms;
 using ToDoListWinForms.Models;
 using ToDoListWinForms.Service;
 
@@ -47,7 +48,7 @@ namespace ToDoListWinForms
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            if(taskListBox.SelectedIndex != -1)
+            if (taskListBox.SelectedIndex != -1)
             {
                 int selectedIndex = taskListBox.SelectedIndex;
 
@@ -61,6 +62,42 @@ namespace ToDoListWinForms
             else
             {
                 MessageBox.Show("Choose task for delete -_-");
+            }
+        }
+
+        private void addTaskButton_Click(object sender, EventArgs e)
+        {
+            CreateForm create = new CreateForm(this, _taskList);
+
+            create.Show();
+            this.Hide();
+        }
+
+        public void RefreshTaskList()
+        {
+            taskListBox.Items.Clear();
+            _taskList = FileService.LoadTasksFromFile();
+            foreach (TaskModel task in _taskList)
+            {
+                taskListBox.Items.Add($"{(task.CompleteDate.HasValue
+                    ? task.CompleteDate.Value.ToString("MM/dd/yy") : "No data set")} - {task.Task}",
+                    task.IsCompleted);
+            }
+        }
+
+        private void editTaskButton_Click(object sender, EventArgs e)
+        {
+            if(taskListBox.SelectedIndex != -1)
+            {
+                int selectedIndex = taskListBox.SelectedIndex;
+                EditForm edit = new EditForm(this, _taskList[selectedIndex], selectedIndex);
+
+                edit.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Choose task for edit! -_-");
             }
         }
     }

@@ -35,6 +35,8 @@
             saveButton = new Button();
             label3 = new Label();
             deleteButton = new Button();
+            addTaskButton = new Button();
+            editTaskButton = new Button();
             SuspendLayout();
             // 
             // createJson
@@ -65,7 +67,7 @@
             taskListBox.HorizontalScrollbar = true;
             taskListBox.Location = new Point(12, 70);
             taskListBox.Name = "taskListBox";
-            taskListBox.Size = new Size(304, 202);
+            taskListBox.Size = new Size(372, 202);
             taskListBox.TabIndex = 3;
             // 
             // saveButton
@@ -97,11 +99,33 @@
             deleteButton.UseVisualStyleBackColor = true;
             deleteButton.Click += deleteButton_Click;
             // 
+            // addTaskButton
+            // 
+            addTaskButton.Location = new Point(174, 291);
+            addTaskButton.Name = "addTaskButton";
+            addTaskButton.Size = new Size(75, 23);
+            addTaskButton.TabIndex = 7;
+            addTaskButton.Text = "Add Task";
+            addTaskButton.UseVisualStyleBackColor = true;
+            addTaskButton.Click += addTaskButton_Click;
+            // 
+            // editTaskButton
+            // 
+            editTaskButton.Location = new Point(255, 291);
+            editTaskButton.Name = "editTaskButton";
+            editTaskButton.Size = new Size(75, 23);
+            editTaskButton.TabIndex = 8;
+            editTaskButton.Text = "Edit Task";
+            editTaskButton.UseVisualStyleBackColor = true;
+            editTaskButton.Click += editTaskButton_Click;
+            // 
             // TaskListView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(396, 450);
+            Controls.Add(editTaskButton);
+            Controls.Add(addTaskButton);
             Controls.Add(deleteButton);
             Controls.Add(label3);
             Controls.Add(saveButton);
@@ -124,5 +148,7 @@
         private Button saveButton;
         private Label label3;
         private Button deleteButton;
+        private Button addTaskButton;
+        private Button editTaskButton;
     }
 }
