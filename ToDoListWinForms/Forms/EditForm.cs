@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ToDoListWinForms.Models;
+﻿using ToDoListWinForms.Models;
 using ToDoListWinForms.Service;
 
 namespace ToDoListWinForms.Forms
@@ -40,29 +31,22 @@ namespace ToDoListWinForms.Forms
 
         private void SaveEditButton_Click(object sender, EventArgs e)
         {
-            if (DateTime.TryParse(editDateBox.Text, out DateTime date) && date > DateTime.Now)
+
+            if (TaskService.ValidateTaskInput(editTaskBox.Text, editDateBox.Text, out DateTime date))
             {
-                if (!string.IsNullOrEmpty(editTaskBox.Text))
-                {
-                    _taskList[_selectedTask].CompleteDate = date;
-                    _taskList[_selectedTask].Task = editTaskBox.Text;
+                _taskList[_selectedTask].CompleteDate = date;
+                _taskList[_selectedTask].Task = editTaskBox.Text;
 
-                    FileService.SaveTasksToFile(_taskList);
-                    MessageBox.Show("Successfuly edit :)");
+                FileService.SaveTasksToFile(_taskList);
+                TaskService.ShowMessage("Successfuly edited :)");
 
-                    _listView.RefreshTaskList();
-
-                    this.Close();
-                    _listView.Show();
-                }
-                else
-                {
-                    MessageBox.Show("Task field is empty -_-");
-                }
+                _listView.RefreshTaskList();
+                this.Close();
+                _listView.Show();
             }
             else
             {
-                MessageBox.Show("Wrong date format -_-");
+                MessageBox.Show("Invalid input!");
             }
         }
 

@@ -90,7 +90,7 @@
             saveCreateButton.TabIndex = 5;
             saveCreateButton.Text = "Save";
             saveCreateButton.UseVisualStyleBackColor = true;
-            saveCreateButton.Click += saveCreateButton_Click;
+            saveCreateButton.Click += SaveCreateButton_Click;
             // 
             // closeButton
             // 
@@ -100,7 +100,7 @@
             closeButton.TabIndex = 6;
             closeButton.Text = "Close";
             closeButton.UseVisualStyleBackColor = true;
-            closeButton.Click += closeButton_Click;
+            closeButton.Click += CloseButton_Click;
             // 
             // CreateForm
             // 

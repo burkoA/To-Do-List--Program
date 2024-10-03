@@ -41,7 +41,7 @@
             // 
             // createJson
             // 
-            createJson.DoWork += createJson_DoWork;
+            createJson.DoWork += CreateJson_DoWork;
             // 
             // label1
             // 
@@ -78,7 +78,7 @@
             saveButton.TabIndex = 4;
             saveButton.Text = "Save";
             saveButton.UseVisualStyleBackColor = true;
-            saveButton.Click += saveButton_Click;
+            saveButton.Click += SaveButton_Click;
             // 
             // label3
             // 
@@ -97,7 +97,7 @@
             deleteButton.TabIndex = 6;
             deleteButton.Text = "Delete";
             deleteButton.UseVisualStyleBackColor = true;
-            deleteButton.Click += deleteButton_Click;
+            deleteButton.Click += DeleteButton_Click;
             // 
             // addTaskButton
             // 
@@ -107,7 +107,7 @@
             addTaskButton.TabIndex = 7;
             addTaskButton.Text = "Add Task";
             addTaskButton.UseVisualStyleBackColor = true;
-            addTaskButton.Click += addTaskButton_Click;
+            addTaskButton.Click += AddTaskButton_Click;
             // 
             // editTaskButton
             // 
@@ -117,7 +117,7 @@
             editTaskButton.TabIndex = 8;
             editTaskButton.Text = "Edit Task";
             editTaskButton.UseVisualStyleBackColor = true;
-            editTaskButton.Click += editTaskButton_Click;
+            editTaskButton.Click += EditTaskButton_Click;
             // 
             // TaskListView
             // 
