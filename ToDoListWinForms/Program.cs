@@ -1,17 +1,19 @@
+﻿using System;
+using System.Windows.Forms;
+using ToDoListWinForms.Forms;
+
 namespace ToDoListWinForms
 {
-    internal static class Program
+    static class Program
     {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
-            ApplicationConfiguration.Initialize();
-            Application.Run(new TaskListView());
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+
+            // Запустити форму логіну при старті програми
+            Application.Run(new LoginForm());  // Замість TaskListView
         }
     }
 }
