@@ -5,20 +5,19 @@ namespace ToDoListWinForms.Forms
 {
     public partial class EditForm : Form
     {
-        private TaskModel _task;
+        private static TaskModel _task;
         private TaskListView _listView;
-        private int _selectedTask;
-        private List<TaskModel> _taskList = FileService.LoadTasksFromFile();
+        private static string _userEmail;
 
-        public EditForm(TaskListView taskView, TaskModel task, int selectedIndex)
+        public EditForm(TaskListView taskView, TaskModel task, string email)
         {
             InitializeComponent();
 
             _listView = taskView;
             _task = task;
-            _selectedTask = selectedIndex;
+            _userEmail = email;
 
-            editDateBox.Text = _task.CompleteDate.HasValue ? _task.CompleteDate.Value.ToString("MM/dd/yy") : "No data set";
+            editDateBox.Text = _task.CompleteDate.ToString("MM/dd/yy");
             editTaskBox.Text = _task.Task;
 
             this.FormClosing += EditForm_FormClosing;
@@ -31,14 +30,19 @@ namespace ToDoListWinForms.Forms
 
         private void SaveEditButton_Click(object sender, EventArgs e)
         {
-
             if (TaskService.ValidateTaskInput(editTaskBox.Text, editDateBox.Text, out DateTime date))
             {
-                _taskList[_selectedTask].CompleteDate = date;
-                _taskList[_selectedTask].Task = editTaskBox.Text;
+                string oldTaskDescription = _task.Task;
 
-                FileService.SaveTasksToFile(_taskList);
-                TaskService.ShowMessage("Successfuly edited :)");
+                TaskModel editedTask = new TaskModel
+                {
+                    Email = _userEmail,
+                    Task = editTaskBox.Text,
+                    CompleteDate = date,
+                };
+
+                FileService.EditTask(editedTask, oldTaskDescription, _userEmail);
+                TaskService.ShowMessage("Successfully edited :)");
 
                 _listView.RefreshTaskList();
                 this.Close();

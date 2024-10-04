@@ -37,6 +37,7 @@
             deleteButton = new Button();
             addTaskButton = new Button();
             editTaskButton = new Button();
+            userEmail = new Label();
             SuspendLayout();
             // 
             // createJson
@@ -119,11 +120,21 @@
             editTaskButton.UseVisualStyleBackColor = true;
             editTaskButton.Click += EditTaskButton_Click;
             // 
+            // userEmail
+            // 
+            userEmail.AutoSize = true;
+            userEmail.Location = new Point(235, 20);
+            userEmail.Name = "userEmail";
+            userEmail.Size = new Size(75, 15);
+            userEmail.TabIndex = 9;
+            userEmail.Text = "SetUserEmail";
+            // 
             // TaskListView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(396, 450);
+            Controls.Add(userEmail);
             Controls.Add(editTaskButton);
             Controls.Add(addTaskButton);
             Controls.Add(deleteButton);
@@ -150,5 +161,6 @@
         private Button deleteButton;
         private Button addTaskButton;
         private Button editTaskButton;
+        private Label userEmail;
     }
 }

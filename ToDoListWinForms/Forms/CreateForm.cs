@@ -7,12 +7,14 @@ namespace ToDoListWinForms.Forms
     {
         private TaskListView _taskListView;
         private List<TaskModel> _taskList;
+        private static string _userEmail;
 
-        public CreateForm(TaskListView taskListView, List<TaskModel> taskList)
+        public CreateForm(TaskListView taskListView, List<TaskModel> taskList, string email)
         {
             InitializeComponent();
             _taskListView = taskListView;
             _taskList = taskList;
+            _userEmail = email;
 
             this.FormClosing += CreateForm_FormClosing;
         }
@@ -29,6 +31,7 @@ namespace ToDoListWinForms.Forms
 
                 TaskModel newTask = new TaskModel()
                 {
+                    Email = _userEmail,
                     Task = taskTextBox.Text,
                     CompleteDate = date,
                 };

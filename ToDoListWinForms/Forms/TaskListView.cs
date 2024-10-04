@@ -8,14 +8,19 @@ namespace ToDoListWinForms
     public partial class TaskListView : Form
     {
         private BackgroundWorker createJsonWorker;
-        private List<TaskModel> _taskList = FileService.LoadTasksFromFile();
+        private static LoginModel _loginUser = new LoginModel();
+        private List<TaskModel> _taskList = new List<TaskModel>();
 
-        public TaskListView()
+        public TaskListView(LoginModel login)
         {
             InitializeComponent();
 
             createJsonWorker = new BackgroundWorker();
             createJsonWorker.DoWork += CreateJson_DoWork;
+            _loginUser.Email = login.Email;
+            userEmail.Text = login.Email;
+
+            _taskList = FileService.LoadTasksFromFile(_loginUser.Email);
         }
 
         private void TaskListView_Load(object sender, EventArgs e)
@@ -24,8 +29,7 @@ namespace ToDoListWinForms
 
             foreach (TaskModel task in _taskList)
             {
-                taskListBox.Items.Add($"{(task.CompleteDate.HasValue
-                    ? task.CompleteDate.Value.ToString("MM/dd/yy") : "No data set")} - {task.Task}"
+                taskListBox.Items.Add($"{task.CompleteDate.ToString("MM/dd/yy")} - {task.Task}"
                     , task.IsCompleted);
             }
         }
@@ -52,22 +56,24 @@ namespace ToDoListWinForms
             {
                 int selectedIndex = taskListBox.SelectedIndex;
 
-                _taskList.RemoveAt(selectedIndex);
+                TaskModel taskText = _taskList[selectedIndex];
+
+                FileService.DeleteTask(_loginUser.Email, taskText.Task);
 
                 taskListBox.Items.RemoveAt(selectedIndex);
 
-                FileService.SaveTasksToFile(_taskList);
-                MessageBox.Show("Successfuly deleted :)");
+                _taskList = FileService.LoadTasksFromFile(_loginUser.Email);
+                MessageBox.Show("Successfully deleted :)");
             }
             else
             {
-                MessageBox.Show("Choose task for delete -_-");
+                MessageBox.Show("Choose a task to delete -_-");
             }
         }
 
         private void AddTaskButton_Click(object sender, EventArgs e)
         {
-            CreateForm create = new CreateForm(this, _taskList);
+            CreateForm create = new CreateForm(this, _taskList, _loginUser.Email);
 
             create.Show();
             this.Hide();
@@ -75,10 +81,10 @@ namespace ToDoListWinForms
 
         private void EditTaskButton_Click(object sender, EventArgs e)
         {
-            if(taskListBox.SelectedIndex != -1)
+            if (taskListBox.SelectedIndex != -1)
             {
                 int selectedIndex = taskListBox.SelectedIndex;
-                EditForm edit = new EditForm(this, _taskList[selectedIndex], selectedIndex);
+                EditForm edit = new EditForm(this, _taskList[selectedIndex], _loginUser.Email);
 
                 edit.Show();
                 this.Hide();
@@ -92,12 +98,11 @@ namespace ToDoListWinForms
         public void RefreshTaskList()
         {
             taskListBox.Items.Clear();
-            _taskList = FileService.LoadTasksFromFile();
+            _taskList = FileService.LoadTasksFromFile(_loginUser.Email);
             foreach (TaskModel task in _taskList)
             {
-                taskListBox.Items.Add($"{(task.CompleteDate.HasValue
-                    ? task.CompleteDate.Value.ToString("MM/dd/yy") : "No data set")} - {task.Task}",
-                    task.IsCompleted);
+                taskListBox.Items.Add($"{task.CompleteDate.ToString("MM/dd/yy")} - {task.Task}"
+                    , task.IsCompleted);
             }
         }
     }
