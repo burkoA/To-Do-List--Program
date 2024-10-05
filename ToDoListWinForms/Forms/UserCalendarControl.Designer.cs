@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            checkBox1 = new CheckBox();
+            checkedListBox1 = new CheckedListBox();
             label1 = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -37,23 +37,21 @@
             // panel1
             // 
             panel1.BackColor = Color.White;
-            panel1.Controls.Add(checkBox1);
+            panel1.Controls.Add(checkedListBox1);
             panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(1, 1);
             panel1.Name = "panel1";
             panel1.Size = new Size(162, 140);
             panel1.TabIndex = 0;
-            panel1.Click += panel1_Click;
             // 
-            // checkBox1
+            // checkedListBox1
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(14, 15);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(15, 14);
-            checkBox1.TabIndex = 1;
-            checkBox1.UseVisualStyleBackColor = true;
+            checkedListBox1.FormattingEnabled = true;
+            checkedListBox1.Location = new Point(3, 35);
+            checkedListBox1.Name = "checkedListBox1";
+            checkedListBox1.Size = new Size(156, 94);
+            checkedListBox1.TabIndex = 4;
             // 
             // label1
             // 
@@ -81,7 +79,7 @@
         #endregion
 
         private Panel panel1;
-        private CheckBox checkBox1;
         private Label label1;
+        private CheckedListBox checkedListBox1;
     }
 }

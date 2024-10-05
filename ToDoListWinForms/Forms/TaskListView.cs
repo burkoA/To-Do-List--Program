@@ -113,5 +113,13 @@ namespace ToDoListWinForms
             this.Close();
             loginForm.Show();
         }
+
+        private void convertToCalendarButton_Click(object sender, EventArgs e)
+        {
+            CalendarForm calendarForm = new CalendarForm(_loginUser.Email);
+
+            calendarForm.Show();
+            this.Close();
+        }
     }
 }

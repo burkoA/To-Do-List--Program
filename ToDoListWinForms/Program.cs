@@ -12,8 +12,7 @@ namespace ToDoListWinForms
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            // Запустити форму логіну при старті програми
-            Application.Run(new CalendarForm());  // Замість TaskListView
+            Application.Run(new LoginForm());
         }
     }
 }

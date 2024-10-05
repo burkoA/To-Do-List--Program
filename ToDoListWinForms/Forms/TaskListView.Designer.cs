@@ -39,6 +39,7 @@
             editTaskButton = new Button();
             userEmail = new Label();
             logoutButton = new Button();
+            convertToCalendarButton = new Button();
             SuspendLayout();
             // 
             // createJson
@@ -140,11 +141,22 @@
             logoutButton.UseVisualStyleBackColor = true;
             logoutButton.Click += logoutButton_Click;
             // 
+            // convertToCalendarButton
+            // 
+            convertToCalendarButton.Location = new Point(12, 332);
+            convertToCalendarButton.Name = "convertToCalendarButton";
+            convertToCalendarButton.Size = new Size(128, 23);
+            convertToCalendarButton.TabIndex = 11;
+            convertToCalendarButton.Text = "Convert To Calendar";
+            convertToCalendarButton.UseVisualStyleBackColor = true;
+            convertToCalendarButton.Click += convertToCalendarButton_Click;
+            // 
             // TaskListView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(396, 450);
+            Controls.Add(convertToCalendarButton);
             Controls.Add(logoutButton);
             Controls.Add(userEmail);
             Controls.Add(editTaskButton);
@@ -175,5 +187,6 @@
         private Button editTaskButton;
         private Label userEmail;
         private Button logoutButton;
+        private Button convertToCalendarButton;
     }
 }

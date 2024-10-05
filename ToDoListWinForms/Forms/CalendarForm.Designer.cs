@@ -40,6 +40,8 @@
             lbMonth = new Label();
             buttonPreviousMonth = new PictureBox();
             buttonNextMonth = new PictureBox();
+            setUserEmailCalendar = new Label();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)buttonPreviousMonth).BeginInit();
             ((System.ComponentModel.ISupportInitialize)buttonNextMonth).BeginInit();
             SuspendLayout();
@@ -153,11 +155,33 @@
             buttonNextMonth.TabStop = false;
             buttonNextMonth.Click += buttonNextMonth_Click;
             // 
+            // setUserEmailCalendar
+            // 
+            setUserEmailCalendar.AutoSize = true;
+            setUserEmailCalendar.Font = new Font("Segoe UI", 15F);
+            setUserEmailCalendar.Location = new Point(888, 39);
+            setUserEmailCalendar.Name = "setUserEmailCalendar";
+            setUserEmailCalendar.Size = new Size(126, 28);
+            setUserEmailCalendar.TabIndex = 11;
+            setUserEmailCalendar.Text = "SetUserEmail";
+            // 
+            // button1
+            // 
+            button1.Location = new Point(888, 70);
+            button1.Name = "button1";
+            button1.Size = new Size(114, 25);
+            button1.TabIndex = 12;
+            button1.Text = "Convert to List";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // CalendarForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1246, 899);
+            ClientSize = new Size(1246, 910);
+            Controls.Add(button1);
+            Controls.Add(setUserEmailCalendar);
             Controls.Add(buttonNextMonth);
             Controls.Add(buttonPreviousMonth);
             Controls.Add(lbMonth);
@@ -191,5 +215,7 @@
         private Label lbMonth;
         private PictureBox buttonPreviousMonth;
         private PictureBox buttonNextMonth;
+        private Label setUserEmailCalendar;
+        private Button button1;
     }
 }
