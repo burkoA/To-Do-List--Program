@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            deleteTaskCalendarButton = new Button();
+            editTaskCalendarButton = new Button();
             checkedListBox1 = new CheckedListBox();
             label1 = new Label();
             panel1.SuspendLayout();
@@ -37,13 +39,35 @@
             // panel1
             // 
             panel1.BackColor = Color.White;
+            panel1.Controls.Add(deleteTaskCalendarButton);
+            panel1.Controls.Add(editTaskCalendarButton);
             panel1.Controls.Add(checkedListBox1);
             panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(1, 1);
             panel1.Name = "panel1";
-            panel1.Size = new Size(162, 140);
+            panel1.Size = new Size(165, 138);
             panel1.TabIndex = 0;
+            // 
+            // deleteTaskCalendarButton
+            // 
+            deleteTaskCalendarButton.Location = new Point(49, 7);
+            deleteTaskCalendarButton.Name = "deleteTaskCalendarButton";
+            deleteTaskCalendarButton.Size = new Size(51, 23);
+            deleteTaskCalendarButton.TabIndex = 6;
+            deleteTaskCalendarButton.Text = "Delete";
+            deleteTaskCalendarButton.UseVisualStyleBackColor = true;
+            deleteTaskCalendarButton.Click += deleteTaskCalendarButton_Click;
+            // 
+            // editTaskCalendarButton
+            // 
+            editTaskCalendarButton.Location = new Point(3, 7);
+            editTaskCalendarButton.Name = "editTaskCalendarButton";
+            editTaskCalendarButton.Size = new Size(40, 23);
+            editTaskCalendarButton.TabIndex = 5;
+            editTaskCalendarButton.Text = "Edit";
+            editTaskCalendarButton.UseVisualStyleBackColor = true;
+            editTaskCalendarButton.Click += editTaskCalendarButton_Click;
             // 
             // checkedListBox1
             // 
@@ -69,7 +93,7 @@
             Controls.Add(panel1);
             Name = "UserCalendarControl";
             Padding = new Padding(1);
-            Size = new Size(164, 142);
+            Size = new Size(167, 140);
             Load += UserCalendarControl_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -81,5 +105,7 @@
         private Panel panel1;
         private Label label1;
         private CheckedListBox checkedListBox1;
+        private Button deleteTaskCalendarButton;
+        private Button editTaskCalendarButton;
     }
 }

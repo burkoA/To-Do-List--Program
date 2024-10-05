@@ -21,7 +21,16 @@ namespace ToDoListWinForms.Forms
 
         private void CreateForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _taskListView.Show();
+            if(_taskListView == null)
+            {
+                CalendarForm form = new CalendarForm(_userEmail);
+                form.Show();
+            }
+            else
+            {
+                _taskListView.RefreshTaskList();
+                _taskListView.Show();
+            }
         }
 
         private void SaveCreateButton_Click(object sender, EventArgs e)
@@ -40,9 +49,7 @@ namespace ToDoListWinForms.Forms
                 FileService.SaveTasksToFile(_taskList);
                 TaskService.ShowMessage("Task added");
 
-                _taskListView.RefreshTaskList();
-                this.Close();
-                _taskListView.Show();
+                this.Close();            
             }
             else
             {
@@ -53,7 +60,6 @@ namespace ToDoListWinForms.Forms
         private void CloseButton_Click(object sender, EventArgs e)
         {
             this.Close();
-            _taskListView.Show();
         }
     }
 

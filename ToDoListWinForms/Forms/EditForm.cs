@@ -25,7 +25,15 @@ namespace ToDoListWinForms.Forms
 
         private void EditForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _listView.Show();
+            if (_listView == null)
+            {
+                CalendarForm calendar = new CalendarForm(_userEmail);
+                calendar.Show();
+            }
+            else
+            {
+                _listView.Show();
+            }
         }
 
         private void SaveEditButton_Click(object sender, EventArgs e)
@@ -44,9 +52,12 @@ namespace ToDoListWinForms.Forms
                 FileService.EditTask(editedTask, oldTaskDescription, _userEmail);
                 TaskService.ShowMessage("Successfully edited :)");
 
-                _listView.RefreshTaskList();
+                if(_listView != null)
+                {
+                    _listView.RefreshTaskList();
+                }
+
                 this.Close();
-                _listView.Show();
             }
             else
             {
@@ -57,7 +68,6 @@ namespace ToDoListWinForms.Forms
         private void EditCloseButton_Click(object sender, EventArgs e)
         {
             this.Close();
-            _listView.Show();
         }
     }
 }

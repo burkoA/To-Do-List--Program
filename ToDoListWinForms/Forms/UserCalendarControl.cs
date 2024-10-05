@@ -20,15 +20,17 @@ namespace ToDoListWinForms.Forms
         private List<TaskModel> _taskList = new List<TaskModel>();
         private string _userEmail;
         private bool _isPlaceholder;
-        
-        public UserCalendarControl(string day, string email, bool isPlaceHolder)
+        private CalendarForm _calendarForm;
+
+        public UserCalendarControl(string day, string email, bool isPlaceHolder, CalendarForm calendar)
         {
             InitializeComponent();
-            
+
             _day = day;
             label1.Text = _day;
             _userEmail = email;
             _isPlaceholder = isPlaceHolder;
+            _calendarForm = calendar;
 
             _taskList = FileService.LoadTasksFromFile(_userEmail);
 
@@ -94,7 +96,75 @@ namespace ToDoListWinForms.Forms
                     label1.ForeColor = Color.FromArgb(64, 64, 64);
                 }
             }
-            catch(Exception) { }
+            catch (Exception) { }
+        }
+
+        private void editTaskCalendarButton_Click(object sender, EventArgs e)
+        {
+            if (checkedListBox1.SelectedIndex != -1)
+            {
+                string selectedTaskText = checkedListBox1.SelectedItem.ToString();
+
+                TaskModel taskToEdit = _taskList.FirstOrDefault(task => task.Task == selectedTaskText);
+
+                if (taskToEdit != null)
+                {
+                    EditForm edit = new EditForm(null, taskToEdit, _userEmail);
+
+                    edit.Show();
+                    _calendarForm.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Task not found");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Choose task for edit! -_-");
+            }
+        }
+
+        private void deleteTaskCalendarButton_Click(object sender, EventArgs e)
+        {
+            if (checkedListBox1.SelectedIndex != -1)
+            {
+                int selectedIndex = checkedListBox1.SelectedIndex;
+
+                TaskModel taskText = _taskList[selectedIndex];
+
+                FileService.DeleteTask(_userEmail, taskText.Task);
+
+                checkedListBox1.Items.RemoveAt(selectedIndex);
+
+                _taskList = FileService.LoadTasksFromFile(_userEmail);
+                MessageBox.Show("Successfully deleted :)");
+            }
+            else
+            {
+                MessageBox.Show("Choose a task to delete -_-");
+            }
+        }
+
+        public void UpdateTaskCompletion(List<TaskModel> taskList)
+        {
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+            {
+                string taskText = checkedListBox1.Items[i].ToString();
+
+                TaskModel taskToUpdate = taskList
+                    .FirstOrDefault(task => task.Task == taskText && task.CompleteDate.Date == GetDate());
+
+                if (taskToUpdate != null)
+                {
+                    taskToUpdate.IsCompleted = checkedListBox1.GetItemChecked(i);
+                }
+            }
+        }
+
+        public DateTime GetDate()
+        {
+            return DateTime.Parse(date);
         }
     }
 }

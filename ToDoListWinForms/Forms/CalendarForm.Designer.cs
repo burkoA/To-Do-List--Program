@@ -42,6 +42,8 @@
             buttonNextMonth = new PictureBox();
             setUserEmailCalendar = new Label();
             button1 = new Button();
+            addTaskButton = new Button();
+            saveButtonCalendar = new Button();
             ((System.ComponentModel.ISupportInitialize)buttonPreviousMonth).BeginInit();
             ((System.ComponentModel.ISupportInitialize)buttonNextMonth).BeginInit();
             SuspendLayout();
@@ -175,11 +177,33 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // addTaskButton
+            // 
+            addTaskButton.Location = new Point(1089, 70);
+            addTaskButton.Name = "addTaskButton";
+            addTaskButton.Size = new Size(75, 25);
+            addTaskButton.TabIndex = 13;
+            addTaskButton.Text = "Add Task";
+            addTaskButton.UseVisualStyleBackColor = true;
+            addTaskButton.Click += addTaskButton_Click;
+            // 
+            // saveButtonCalendar
+            // 
+            saveButtonCalendar.Location = new Point(1008, 70);
+            saveButtonCalendar.Name = "saveButtonCalendar";
+            saveButtonCalendar.Size = new Size(75, 25);
+            saveButtonCalendar.TabIndex = 14;
+            saveButtonCalendar.Text = "Save";
+            saveButtonCalendar.UseVisualStyleBackColor = true;
+            saveButtonCalendar.Click += saveButtonCalendar_Click;
+            // 
             // CalendarForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1246, 910);
+            Controls.Add(saveButtonCalendar);
+            Controls.Add(addTaskButton);
             Controls.Add(button1);
             Controls.Add(setUserEmailCalendar);
             Controls.Add(buttonNextMonth);
@@ -217,5 +241,7 @@
         private PictureBox buttonNextMonth;
         private Label setUserEmailCalendar;
         private Button button1;
+        private Button addTaskButton;
+        private Button saveButtonCalendar;
     }
 }
