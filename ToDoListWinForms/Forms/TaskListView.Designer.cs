@@ -38,6 +38,7 @@
             addTaskButton = new Button();
             editTaskButton = new Button();
             userEmail = new Label();
+            logoutButton = new Button();
             SuspendLayout();
             // 
             // createJson
@@ -129,11 +130,22 @@
             userEmail.TabIndex = 9;
             userEmail.Text = "SetUserEmail";
             // 
+            // logoutButton
+            // 
+            logoutButton.Location = new Point(289, 407);
+            logoutButton.Name = "logoutButton";
+            logoutButton.Size = new Size(75, 23);
+            logoutButton.TabIndex = 10;
+            logoutButton.Text = "Logout";
+            logoutButton.UseVisualStyleBackColor = true;
+            logoutButton.Click += logoutButton_Click;
+            // 
             // TaskListView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(396, 450);
+            Controls.Add(logoutButton);
             Controls.Add(userEmail);
             Controls.Add(editTaskButton);
             Controls.Add(addTaskButton);
@@ -162,5 +174,6 @@
         private Button addTaskButton;
         private Button editTaskButton;
         private Label userEmail;
+        private Button logoutButton;
     }
 }

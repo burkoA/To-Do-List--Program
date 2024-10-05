@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             label1 = new Label();
-            dateTextBox = new TextBox();
             label2 = new Label();
             label3 = new Label();
             taskTextBox = new TextBox();
             saveCreateButton = new Button();
             closeButton = new Button();
+            dateTextBox = new DateTimePicker();
             SuspendLayout();
             // 
             // label1
@@ -48,28 +48,21 @@
             label1.TabIndex = 0;
             label1.Text = "Create Task Form";
             // 
-            // dateTextBox
-            // 
-            dateTextBox.Location = new Point(12, 95);
-            dateTextBox.Name = "dateTextBox";
-            dateTextBox.Size = new Size(130, 23);
-            dateTextBox.TabIndex = 1;
-            // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F);
             label2.Location = new Point(12, 71);
             label2.Name = "label2";
-            label2.Size = new Size(130, 21);
+            label2.Size = new Size(42, 21);
             label2.TabIndex = 2;
-            label2.Text = "Date - mm/dd/yy";
+            label2.Text = "Date";
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 12F);
-            label3.Location = new Point(148, 71);
+            label3.Location = new Point(181, 71);
             label3.Name = "label3";
             label3.Size = new Size(122, 21);
             label3.TabIndex = 3;
@@ -77,14 +70,14 @@
             // 
             // taskTextBox
             // 
-            taskTextBox.Location = new Point(148, 95);
+            taskTextBox.Location = new Point(181, 95);
             taskTextBox.Name = "taskTextBox";
             taskTextBox.Size = new Size(153, 23);
             taskTextBox.TabIndex = 4;
             // 
             // saveCreateButton
             // 
-            saveCreateButton.Location = new Point(67, 143);
+            saveCreateButton.Location = new Point(79, 143);
             saveCreateButton.Name = "saveCreateButton";
             saveCreateButton.Size = new Size(75, 23);
             saveCreateButton.TabIndex = 5;
@@ -94,7 +87,7 @@
             // 
             // closeButton
             // 
-            closeButton.Location = new Point(148, 143);
+            closeButton.Location = new Point(181, 143);
             closeButton.Name = "closeButton";
             closeButton.Size = new Size(75, 23);
             closeButton.TabIndex = 6;
@@ -102,17 +95,24 @@
             closeButton.UseVisualStyleBackColor = true;
             closeButton.Click += CloseButton_Click;
             // 
+            // dateTextBox
+            // 
+            dateTextBox.Location = new Point(12, 95);
+            dateTextBox.Name = "dateTextBox";
+            dateTextBox.Size = new Size(142, 23);
+            dateTextBox.TabIndex = 7;
+            // 
             // CreateForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(320, 330);
+            ClientSize = new Size(360, 330);
+            Controls.Add(dateTextBox);
             Controls.Add(closeButton);
             Controls.Add(saveCreateButton);
             Controls.Add(taskTextBox);
             Controls.Add(label3);
             Controls.Add(label2);
-            Controls.Add(dateTextBox);
             Controls.Add(label1);
             Name = "CreateForm";
             Text = "Create Form";
@@ -123,11 +123,11 @@
         #endregion
 
         private Label label1;
-        private TextBox dateTextBox;
         private Label label2;
         private Label label3;
         private TextBox taskTextBox;
         private Button saveCreateButton;
         private Button closeButton;
+        private DateTimePicker dateTextBox;
     }
 }

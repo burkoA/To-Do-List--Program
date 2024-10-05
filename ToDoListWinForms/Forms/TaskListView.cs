@@ -105,5 +105,13 @@ namespace ToDoListWinForms
                     , task.IsCompleted);
             }
         }
+
+        private void logoutButton_Click(object sender, EventArgs e)
+        {
+            LoginForm loginForm = new LoginForm();
+
+            this.Close();
+            loginForm.Show();
+        }
     }
 }

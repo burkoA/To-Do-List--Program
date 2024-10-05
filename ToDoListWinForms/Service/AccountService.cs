@@ -40,6 +40,33 @@ namespace ToDoListWinForms.Service
             }
         }
 
+        public static List<LoginModel> LoadAllProfile()
+        {
+            List<LoginModel> loginModelList = new List<LoginModel>();
+
+            using (FileStream fileStream = new FileStream(filePath,FileMode.Open, FileAccess.Read))
+            {
+                using (BinaryReader reader = new BinaryReader(fileStream))
+                {
+                    while(fileStream.Position < fileStream.Length)
+                    {
+                        string storedEmail = reader.ReadString();
+                        string storedPassword = reader.ReadString();
+
+                        LoginModel model = new LoginModel
+                        {
+                            Email = storedEmail,
+                            Password = storedPassword
+                        };
+
+                        loginModelList.Add(model);
+                    }
+
+                    return loginModelList;
+                }
+            }
+        }
+
         public static string GetPasswordHash(string password)
         {
             SHA512 sha512 = SHA512.Create();

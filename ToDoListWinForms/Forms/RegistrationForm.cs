@@ -5,7 +5,8 @@ namespace ToDoListWinForms.Forms
 {
     public partial class RegistrationForm : Form
     {
-        private RegistrationModel registrationModel = new RegistrationModel();
+        private RegistrationModel _registrationModel = new RegistrationModel();
+        private List<LoginModel> _loginModelList = AccountService.LoadAllProfile();
 
         public RegistrationForm()
         {
@@ -16,18 +17,25 @@ namespace ToDoListWinForms.Forms
         {
             if (repeatPasswordBox.Text == createPasswordBox.Text && AccountService.IsValidEmail(createEmailBox.Text) == true)
             {
+                List<LoginModel> loginEmail = _loginModelList.Where(e => e.Email == createEmailBox.Text.Trim()).ToList();
+                if (loginEmail.Count == 0)
+                {
+                    _registrationModel.Password = createPasswordBox.Text;
+                    _registrationModel.Email = createEmailBox.Text;
 
-                registrationModel.Password = createPasswordBox.Text;
-                registrationModel.Email = createEmailBox.Text;
+                    AccountService.CreateBinFile();
+                    AccountService.SaveDataToFile(_registrationModel);
 
-                AccountService.CreateBinFile();
-                AccountService.SaveDataToFile(registrationModel);
+                    MessageBox.Show("You create account :)");
 
-                MessageBox.Show("You create account :)");
-
-                LoginForm loginForm = new LoginForm();
-                this.Close();
-                loginForm.Show();
+                    LoginForm loginForm = new LoginForm();
+                    this.Close();
+                    loginForm.Show();
+                }
+                else
+                {
+                    MessageBox.Show("This email is already in use");
+                }
             }
             else
             {
