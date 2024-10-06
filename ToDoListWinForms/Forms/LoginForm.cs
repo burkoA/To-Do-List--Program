@@ -19,7 +19,7 @@ namespace ToDoListWinForms.Forms
 
             if (AccountService.IsValidLogin(_loginModel.Email, _loginModel.Password))
             {
-                TaskListView _taskListView = new TaskListView(_loginModel);
+                TaskListView _taskListView = new TaskListView(_loginModel, this);
 
                 MessageBox.Show("Login Succesful!");
 

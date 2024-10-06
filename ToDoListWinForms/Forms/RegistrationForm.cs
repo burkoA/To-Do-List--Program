@@ -11,6 +11,16 @@ namespace ToDoListWinForms.Forms
         public RegistrationForm()
         {
             InitializeComponent();
+
+            this.FormClosing += RegistrationForm_FormClosing;
+        }
+
+        private void RegistrationForm_FormClosing(object? sender, FormClosingEventArgs e)
+        {
+            LoginForm loginForm = new LoginForm();
+
+            this.Close();
+            loginForm.Show();
         }
 
         private void CreateAcc_Click(object sender, EventArgs e)

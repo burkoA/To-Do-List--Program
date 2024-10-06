@@ -8,13 +8,15 @@ namespace ToDoListWinForms.Forms
         private TaskListView _taskListView;
         private List<TaskModel> _taskList;
         private static string _userEmail;
+        private LoginForm _loginForm;
 
-        public CreateForm(TaskListView taskListView, List<TaskModel> taskList, string email)
+        public CreateForm(TaskListView taskListView, List<TaskModel> taskList, string email, LoginForm loginForm)
         {
             InitializeComponent();
             _taskListView = taskListView;
             _taskList = taskList;
             _userEmail = email;
+            _loginForm = loginForm;
 
             this.FormClosing += CreateForm_FormClosing;
         }
@@ -23,7 +25,7 @@ namespace ToDoListWinForms.Forms
         {
             if(_taskListView == null)
             {
-                CalendarForm form = new CalendarForm(_userEmail);
+                CalendarForm form = new CalendarForm(_userEmail, _loginForm);
                 form.Show();
             }
             else

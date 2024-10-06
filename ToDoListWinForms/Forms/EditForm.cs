@@ -8,16 +8,18 @@ namespace ToDoListWinForms.Forms
         private static TaskModel _task;
         private TaskListView _listView;
         private static string _userEmail;
+        private LoginForm _loginForm;
 
-        public EditForm(TaskListView taskView, TaskModel task, string email)
+        public EditForm(TaskListView taskView, TaskModel task, string email, LoginForm loginForm)
         {
             InitializeComponent();
 
             _listView = taskView;
             _task = task;
             _userEmail = email;
+            _loginForm = loginForm;
 
-            editDateBox.Text = _task.CompleteDate.ToString("MM/dd/yy");
+            dateTimePicker1.Text = _task.CompleteDate.ToString("MM/dd/yy");
             editTaskBox.Text = _task.Task;
 
             this.FormClosing += EditForm_FormClosing;
@@ -27,7 +29,7 @@ namespace ToDoListWinForms.Forms
         {
             if (_listView == null)
             {
-                CalendarForm calendar = new CalendarForm(_userEmail);
+                CalendarForm calendar = new CalendarForm(_userEmail,_loginForm);
                 calendar.Show();
             }
             else
@@ -38,7 +40,7 @@ namespace ToDoListWinForms.Forms
 
         private void SaveEditButton_Click(object sender, EventArgs e)
         {
-            if (TaskService.ValidateTaskInput(editTaskBox.Text, editDateBox.Text, out DateTime date))
+            if (TaskService.ValidateTaskInput(editTaskBox.Text, dateTimePicker1.Text, out DateTime date))
             {
                 string oldTaskDescription = _task.Task;
 

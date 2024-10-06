@@ -21,8 +21,9 @@ namespace ToDoListWinForms.Forms
         private string _userEmail;
         private bool _isPlaceholder;
         private CalendarForm _calendarForm;
+        private LoginForm _loginForm;
 
-        public UserCalendarControl(string day, string email, bool isPlaceHolder, CalendarForm calendar)
+        public UserCalendarControl(string day, string email, bool isPlaceHolder, CalendarForm calendar, LoginForm loginForm)
         {
             InitializeComponent();
 
@@ -31,17 +32,22 @@ namespace ToDoListWinForms.Forms
             _userEmail = email;
             _isPlaceholder = isPlaceHolder;
             _calendarForm = calendar;
+            _loginForm = loginForm;
 
             _taskList = FileService.LoadTasksFromFile(_userEmail);
 
             this.BackColor = Color.Black;
             checkedListBox1.Hide();
+            editTaskCalendarButton.Hide();
+            deleteTaskCalendarButton.Hide();
 
             date = CalendarForm._month + "/" + _day + "/" + CalendarForm._year;
 
             if (!_isPlaceholder)
             {
                 checkedListBox1.Show();
+                editTaskCalendarButton.Show();
+                deleteTaskCalendarButton.Show();
                 if (!string.IsNullOrEmpty(_day) && int.TryParse(_day, out int dayInt))
                 {
                     try
@@ -109,10 +115,10 @@ namespace ToDoListWinForms.Forms
 
                 if (taskToEdit != null)
                 {
-                    EditForm edit = new EditForm(null, taskToEdit, _userEmail);
+                    EditForm edit = new EditForm(null, taskToEdit, _userEmail, _loginForm);
 
                     edit.Show();
-                    _calendarForm.Close();
+                    _calendarForm.Hide();
                 }
                 else
                 {
@@ -131,14 +137,23 @@ namespace ToDoListWinForms.Forms
             {
                 int selectedIndex = checkedListBox1.SelectedIndex;
 
-                TaskModel taskText = _taskList[selectedIndex];
+                string selectedTaskText = checkedListBox1.SelectedItem.ToString();
 
-                FileService.DeleteTask(_userEmail, taskText.Task);
+                TaskModel taskText = _taskList.FirstOrDefault(task => task.Task == selectedTaskText);
 
-                checkedListBox1.Items.RemoveAt(selectedIndex);
+                if (taskText != null)
+                {
+                    FileService.DeleteTask(_userEmail, taskText.Task);
 
-                _taskList = FileService.LoadTasksFromFile(_userEmail);
-                MessageBox.Show("Successfully deleted :)");
+                    checkedListBox1.Items.RemoveAt(selectedIndex);
+
+                    _taskList = FileService.LoadTasksFromFile(_userEmail);
+                    MessageBox.Show("Successfully deleted :)");
+                }
+                else
+                {
+                    MessageBox.Show("Task not found!");
+                }
             }
             else
             {
@@ -165,6 +180,11 @@ namespace ToDoListWinForms.Forms
         public DateTime GetDate()
         {
             return DateTime.Parse(date);
+        }
+
+        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _calendarForm.MarkAsUnsaved();
         }
     }
 }

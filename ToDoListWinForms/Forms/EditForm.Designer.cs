@@ -31,10 +31,10 @@
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
-            editDateBox = new TextBox();
             editTaskBox = new TextBox();
             SaveEditButton = new Button();
             EditCloseButton = new Button();
+            dateTimePicker1 = new DateTimePicker();
             SuspendLayout();
             // 
             // label1
@@ -67,13 +67,6 @@
             label3.TabIndex = 2;
             label3.Text = "Task Description";
             // 
-            // editDateBox
-            // 
-            editDateBox.Location = new Point(12, 102);
-            editDateBox.Name = "editDateBox";
-            editDateBox.Size = new Size(130, 23);
-            editDateBox.TabIndex = 3;
-            // 
             // editTaskBox
             // 
             editTaskBox.Location = new Point(160, 102);
@@ -101,15 +94,22 @@
             EditCloseButton.UseVisualStyleBackColor = true;
             EditCloseButton.Click += EditCloseButton_Click;
             // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.Location = new Point(12, 102);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(142, 23);
+            dateTimePicker1.TabIndex = 7;
+            // 
             // EditForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(339, 240);
+            Controls.Add(dateTimePicker1);
             Controls.Add(EditCloseButton);
             Controls.Add(SaveEditButton);
             Controls.Add(editTaskBox);
-            Controls.Add(editDateBox);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -124,9 +124,9 @@
         private Label label1;
         private Label label2;
         private Label label3;
-        private TextBox editDateBox;
         private TextBox editTaskBox;
         private Button SaveEditButton;
         private Button EditCloseButton;
+        private DateTimePicker dateTimePicker1;
     }
 }

@@ -72,6 +72,7 @@
             taskListBox.Name = "taskListBox";
             taskListBox.Size = new Size(372, 202);
             taskListBox.TabIndex = 3;
+            taskListBox.SelectedIndexChanged += taskListBox_SelectedIndexChanged;
             // 
             // saveButton
             // 
