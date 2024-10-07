@@ -34,7 +34,7 @@ namespace ToDoListWinForms.Forms
 
         private void RegistrationButton_Click(object sender, EventArgs e)
         {
-            RegistrationForm _registrationForm = new RegistrationForm();
+            RegistrationForm _registrationForm = new RegistrationForm(this);
 
             this.Hide();
             _registrationForm.Show();

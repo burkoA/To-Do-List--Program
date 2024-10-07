@@ -7,20 +7,19 @@ namespace ToDoListWinForms.Forms
     {
         private RegistrationModel _registrationModel = new RegistrationModel();
         private List<LoginModel> _loginModelList = AccountService.LoadAllProfile();
+        private LoginForm _loginForm;
 
-        public RegistrationForm()
+        public RegistrationForm(LoginForm loginForms)
         {
             InitializeComponent();
+            _loginForm = loginForms;
 
             this.FormClosing += RegistrationForm_FormClosing;
         }
 
         private void RegistrationForm_FormClosing(object? sender, FormClosingEventArgs e)
         {
-            LoginForm loginForm = new LoginForm();
-
-            this.Close();
-            loginForm.Show();
+            _loginForm.Show();
         }
 
         private void CreateAcc_Click(object sender, EventArgs e)
@@ -38,9 +37,7 @@ namespace ToDoListWinForms.Forms
 
                     MessageBox.Show("You create account :)");
 
-                    LoginForm loginForm = new LoginForm();
                     this.Close();
-                    loginForm.Show();
                 }
                 else
                 {
@@ -55,10 +52,7 @@ namespace ToDoListWinForms.Forms
 
         private void BackToLoginForm_Click(object sender, EventArgs e)
         {
-            LoginForm loginForm = new LoginForm();
-
             this.Close();
-            loginForm.Show();
         }
     }
 }
